@@ -1,12 +1,15 @@
 package de.oncoding.freemarkertutorial
 
+import org.hibernate.annotations.GenericGenerator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
+import java.util.*
 import javax.persistence.Entity
+import javax.persistence.GeneratedValue
 import javax.persistence.Id
 
 @Controller
@@ -37,7 +40,14 @@ class CustomerController {
             birthyear: Int
     ): String {
 
-        // TODO create customer in DB
+        customerRepository.save(
+                Customer(
+                        id = null,
+                        firstname = firstname,
+                        lastname = lastname,
+                        birthyear = birthyear
+                )
+        )
 
         return getCustomerList(model, null)
     }
@@ -46,7 +56,9 @@ class CustomerController {
 
 @Entity
 data class Customer(
-        @Id val id: Int,
+        @Id @GeneratedValue(generator = "native")
+        @GenericGenerator(name = "native", strategy = "native")
+        val id: Int?,
         val firstname: String,
         val lastname: String,
         val birthyear: Int
