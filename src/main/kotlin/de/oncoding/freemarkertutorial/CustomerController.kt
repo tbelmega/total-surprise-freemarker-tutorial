@@ -10,13 +10,13 @@ import javax.persistence.Entity
 import javax.persistence.Id
 
 @Controller
-class HelloController {
+class CustomerController {
 
     @Autowired
     private lateinit var customerRepository: CustomerRepository
 
     @GetMapping("/")
-    fun hello(
+    fun getCustomerList(
             model: Model,
             @RequestParam(value = "searchTerm", required = false) name: String?
     ): String {
@@ -27,6 +27,19 @@ class HelloController {
 
         model.addAttribute("customers", loadedCustomers)
         return "hello"
+    }
+
+    @PostMapping("/create-customer")
+    fun createCustomer(
+            model: Model,
+            firstname:String,
+            lastname: String,
+            birthyear: Int
+    ): String {
+
+        // TODO create customer in DB
+
+        return getCustomerList(model, null)
     }
 
 }

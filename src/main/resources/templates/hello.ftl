@@ -35,5 +35,22 @@
     </#list>
 </table>
 
+<form class="mt-5" method="post" action="/create-customer">
+    <h2>Kunden anlegen</h2>
+    <div class="formgroup">
+        <label for="firstname">Vorname</label>
+        <input id="firstname" type="text" name="firstname">
+    </div>
+    <div class="formgroup">
+        <label for="lastname">Nachname</label>
+        <input id="lastname" type="text" name="lastname">
+    </div>
+    <div class="formgroup">
+        <label for="birthyear">Geburtsjahr</label>
+        <input id="birthyear" type="number" name="birthyear" placeholder="YYYY">
+    </div>
+    <button type="submit" class="btn btn-primary">Absenden</button>
+</form>
+
 </body>
 </html>
